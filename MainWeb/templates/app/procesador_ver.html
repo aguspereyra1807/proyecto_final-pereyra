@@ -1,0 +1,31 @@
+{% extends 'app/base_detalles.html' %}
+{% load static %}
+
+
+{% block image %}
+    
+    {% if procesador.imagenComponente %}
+    <p><img src="{{procesador.imagenComponente.url}}" alt=""></p>
+    {% endif %}
+        
+{% endblock image %}
+
+
+{% block title %}
+    {{procesador.titulo}}
+{% endblock title %}
+
+
+{% block body %}
+    <li><strong>Nombre: {{procesador.titulo}}</strong></li>
+    <li><strong>Marca: {{procesador.marca}}</strong></li>
+    <li><strong>Precio: ${{procesador.precio}} ARS</strong></li>
+    <li><strong>Año de lanzamiento: {{procesador.year}}</strong></li>
+    <li><strong>Fecha de publicación: {{procesador.fechaPublicacion}}</strong></li>
+{% endblock body %}
+
+
+{% block description %}
+    <p>{{procesador.descripcion}}</p>
+{% endblock description %}
+    
