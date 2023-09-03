@@ -1,0 +1,16 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+
+{% block title %}
+<form method="post">
+    {% csrf_token %}
+    <div data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-8 col-lg-8">
+            <h1><p style="color:rgb(255, 217, 0)">Estás seguro que quieres eliminar "{{motherboard.titulo}}"</p></h1>
+            <p>
+        <div class="col-sm-6 align-items-center">
+            <button type="submit" class="btn btn-danger">Eliminar publicación</button>
+        </div>
+</p>
+</form>
+{% endblock title %}

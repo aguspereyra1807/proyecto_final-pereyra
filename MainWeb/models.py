@@ -9,7 +9,6 @@ class Componente(models.Model):
 	('motherboard', 'Placa Madre'),
 	('gabinete', 'Gabinete'),
 	('ram', 'RAM'),
-	('almacenamiento', 'Almacenamiento'),
 	('otro', 'Otro'))
 	componente = models.CharField(max_length=20, choices=componenteSeleccion, default='procesador')
 	titulo = models.CharField(max_length=60)
@@ -30,6 +29,7 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=40)
     comentario = models.CharField(max_length=250)
     fechaComentario = models.DateTimeField(auto_now_add=True)
+    componenteAsociado = models.ForeignKey(Componente, on_delete=models.CASCADE, null=True, related_name='comentarios')
     
     class Meta:
         ordering = ['-fechaComentario']
@@ -63,6 +63,7 @@ class Sucursal(models.Model):
     provincia = models.CharField(max_length=30, choices=provinciaSeleccion, default='buenos_aires')
     nombre = models.CharField(max_length=60)
     direccion = models.CharField(max_length=50,default='')
+    mapa = models.URLField(max_length=500, default='') 
     
     class Meta:
         ordering = ['nombre']

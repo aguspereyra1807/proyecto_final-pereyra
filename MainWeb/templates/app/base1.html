@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
-  {% load static %}
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -49,11 +49,11 @@
         <ul>
           <li><a class="nav-link scrollto active" href="{% url 'home' %}">Inicio</a></li>
           <li><a class="nav-link scrollto" href="{% url 'procesadores_lista' %}">Procesadores</a></li> 
-          <li><a class="nav-link scrollto" href="#!">Gráficas</a></li>
-          <li><a class="nav-link scrollto" href="#!">MotherBoards</a></li>
-          <li><a class="nav-link scrollto" href="#!">RAM</a></li>
-          <li><a class="nav-link scrollto" href="#!">Gabinetes</a></li>
-          <li><a class="nav-link scrollto" href="#!">Otros</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'placa_video_lista' %}">Placas de Video</a></li> 
+          <li><a class="nav-link scrollto" href="{% url 'motherboard_lista' %}">Motherboards</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'ram_lista' %}">RAM</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'gabinete_lista' %}">Gabinetes</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'otro_lista' %}">Otros</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -82,27 +82,28 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-store-line"></i>
-            <h3><a href="">Componentes</a></h3>
+            <h3><a href="{% url 'componentes' %}">Componentes</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">Sucursales</a></h3>
+            <h3><a href="#cta">Sucursales</a></h3>
           </div>
         </div>
+        {% if user.is_superuser == True or user.is_staff == True %}
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-calendar-todo-line"></i>
-            <h3><a href="">Comentarios</a></h3>
+            <h3><a href="{% url 'componente_agregar' %}">Agregar componentes</a></h3>
           </div>
         </div>
+        {% endif %}
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-paint-brush-line"></i>
-            <h3><a href="#about">About</a></h3>
+            <h3><a href="#about">Sobre mí</a></h3>
           </div>
-        </div>
         <!---
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
@@ -118,11 +119,15 @@
   <main id="main">
 
     <!-- ======= Sección About Us ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
 
+    <section id="about" class="about">
+      <br>
+      <div class="container" data-aos="fade-up">
+        <br>
+        <br>
+        <br>
         <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+          <div class="col-lg-6 order-2 order-lg-3" data-aos="fade-left" data-aos-delay="100">
             <img src="{% static 'app/img/about.jpg' %}" class="img-fluid" alt=""> 
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
@@ -138,11 +143,25 @@
             </ul>
           </div>
         </div>
-
       </div>
+      <br>
+      <br>
+      <br>
     </section>
+    
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+    
+        <div class="text-center" width="100%">
+          <h3>Sucursales</h3>
+          {% for s in sucursales %}
+            <a class="cta-btn" href="{% url 'sucursal_detalles' s.id %}">{{s.nombre}}</a>
+            <br>
+          {% endfor %}
+        <br>
 
-
+        </div>
+    </section>
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
@@ -159,31 +178,28 @@
               </p>
               <div class="social-links mt-3">
                 <a href="https://twitter.com/agusssspereyraa" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
+                <a href="https://www.instagram.com/aguss_pereyraa/" class="instagram"><i class="bx bxl-instagram"></i></a>
             </div>
           </div>
+        </div>
 
           <div class="col-lg-2 col-md-6 footer-links">
             <h4></h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Procesadores</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Gráficas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">MotherBoards</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">RAM</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'procesadores_lista' %}">Procesadores</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'placa_video_lista' %}">Gráficas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'motherboard_lista' %}">MotherBoards</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'ram_lista' %}">RAM</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4></h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Gabinetes</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Otros</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Clientes</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'gabinete_lista' %}">Gabinetes</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'otro_lista' %}">Otros</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#cta">Sucursales</a></li>
             </ul>
           </div>
           
@@ -192,7 +208,7 @@
         &copy; Copyright <strong><span>PC Finder</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        Designed by <a href="#!">Agus</a>
+        Designed by <a href="#about">Agus</a>
       </div>
     </div>
   </footer><!-- End Footer -->

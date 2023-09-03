@@ -1,0 +1,26 @@
+{% extends 'app/base_detalles.html' %}
+{% load static %}
+
+
+{% block image %}
+    
+<iframe src="{{sucursal.mapa}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+{% endblock image %}
+
+{% block title %}
+    <h2 style="color:rgb(255, 208, 0)">{{sucursal.nombre}}</h2>
+{% endblock title %}
+
+
+{% block body %}
+    <li><strong>Nombre:</strong> {{sucursal.nombre}}</li>
+    <li><strong>Provincia:</strong> {{sucursal.get_provincia_display}} </li>
+    <li><strong>Dirección:</strong> {{sucursal.direccion}}</li>
+{% endblock body %}
+
+
+{% block comments %}
+
+{% endblock comments %}
+    

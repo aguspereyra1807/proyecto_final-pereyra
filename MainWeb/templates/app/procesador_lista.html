@@ -3,25 +3,40 @@
 
 {% block title %}
 <div data-aos="fade-up" data-aos-delay="150">
-    <div class="col-xl-6 col-lg-8">
-        <h1><p style="color:rgb(255, 217, 0)">Nuestros procesadores</p></h1>
+    <div class="col-xl-20 col-lg-20">
+        <h1><p style="color:rgb(255, 217, 0)">Nuestros Procesadores</p></h1>
+    {% if user.is_superuser == True or user.is_staff == True %}        
+    <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <h4><a href="{% url 'componente_agregar' %}">Añadir + componente</a></h4>
+    {% endif %}
 {% endblock title %}
 
 {% block body %}
+<br>
 <div class="container text-center">
     <div class="row">
-            {% for procesador in procesadores %}
-            <div class="col-sm-6 align-items-center">
-                <div class="card-body">
-                <img src="{{procesador.imagenComponente.url}}" class="" width="auto" length="auto" alt="">
-                <p>{{procesador.imagenComponente.url}}</p>
-                {{procesador.titulo}}
-                    <a href="{% url 'procesadores_ver' procesador.id %}"><i class="bi bi-eye"></i></a>
-                {% if user.id == procesador.usuario.id %}
-                    <a href="{% url 'procesadores_editar' procesador.id %}"><i class="bi bi-pencil-fill"></i></a>
-                    <a href="{% url 'procesadores_eliminar' procesador.id %}"><i class="bi bi-trash text-danger"></i></a>
-                {% endif %}
-                </div>
+        {% for procesador in procesadores %}
+        <div class="col-sm-4 align-items-center" data-aos="fade-up" data-aos-delay="550">
+            <div class="card-body">
+            
+            {% if procesador.imagenComponente.url is not None %}
+                <img src="{{procesador.imagenComponente.url}}" class="" width="200px" length="auto" alt="">
+            {% else %}
+                No hay imagen aún
+            {% endif %}
+                
+            <div class="col-xl-12 col-lg-8"><h4>{{procesador.titulo}}</h4></div>
+            <div class="col-xl-12 col-lg-8" style="color:rgb(0, 0, 0)"><h6>${{procesador.precio}} ARS</h6></div>
+            <a class="nav-link scrollto" style="color:rgb(255, 196, 0)" href="{% url 'procesadores_detalles' procesador.id %}">Ver producto</a></li>
+            {% if user.is_superuser == True or user.is_staff == True %}
+                <a href="{% url 'procesadores_editar' procesador.id %}"><i style="color:rgb(255, 196, 0)" class="bi bi-pencil-fill"></i></a>
+                <a href="{% url 'procesadores_eliminar' procesador.id %}"><i style="color:rgb(255, 196, 0)" class="bi bi-trash"></i></a>
+            {% endif %}
             </div>
-            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+<br>    
+
 {% endblock body %}

@@ -1,0 +1,44 @@
+{% extends 'app/base_detalles.html' %}
+{% load static %}
+
+
+{% block image %}
+    
+    {% if gabinete.imagenComponente %}
+    <p><img src="{{gabinete.imagenComponente.url}}" width="auto" length="auto" alt=""></p>
+    {% endif %}
+        
+{% endblock image %}
+
+
+{% block title %}
+    <h2 style="color:rgb(255, 208, 0)">{{gabinete.titulo}}</h2>
+{% endblock title %}
+
+
+{% block body %}
+    <li><strong>Nombre:</strong> {{gabinete.titulo}}</li>
+    <li><strong>Marca:</strong> {{gabinete.marca}}</li>
+    <li><strong>Precio:</strong> ${{gabinete.precio}} ARS</li>
+    <li><strong>Año de lanzamiento:</strong> {{gabinete.year}}</li>
+    <li><strong>Fecha de publicación:</strong> {{gabinete.fechaPublicacion}}</li>
+    <li><strong>Descripción:</strong> {{gabinete.descripcion}}</li>
+{% endblock body %}
+
+
+{% block comments %}
+<h2>Comentarios: </h2>     
+    {% if not gabinete.comentarios.all %}
+        Aún no hay comentarios
+        <hr>
+    {% else %}
+        {% for comentario in gabinete.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.comentario}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario_agregar' gabinete.pk %}">+ Agregar comentario</a>
+{% endblock comments %}
+    

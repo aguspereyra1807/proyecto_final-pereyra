@@ -52,16 +52,16 @@
         <ul>
           <li><a class="nav-link scrollto active" href="{% url 'home' %}">Inicio</a></li>
           <li><a class="nav-link scrollto" href="{% url 'procesadores_lista' %}">Procesadores</a></li> 
-          <li><a class="nav-link scrollto" href="#!">Gráficas</a></li>
-          <li><a class="nav-link scrollto" href="#!">MotherBoards</a></li>
-          <li><a class="nav-link scrollto" href="#!">RAM</a></li>
-          <li><a class="nav-link scrollto" href="#!">Gabinetes</a></li>
-          <li><a class="nav-link scrollto" href="#!">Otros</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'placa_video_lista' %}">Placas de Video</a></li> 
+          <li><a class="nav-link scrollto" href="{% url 'motherboard_lista' %}">Motherboards</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'ram_lista' %}">RAM</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'gabinete_lista' %}">Gabinetes</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'otro_lista' %}">Otros</a></li>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       {% if user.is_authenticated %}
-        <small><p style="color:red" >{{ mensaje }}</p></small>
-        <a href="{% url 'register' %}" class="get-started-btn scrollto">Cerrar Sesión</a>
+        <a href="{% url 'logout' %}" class="get-started-btn scrollto">Cerrar Sesión</a>
+        <a href="{% url 'edit_user' %}" class="get-started-btn scrollto" style="color:rgb(255, 230, 0)" >Hola, {{user.username}}</a> 
       {% else %}
         <a href="{% url 'register' %}" class="get-started-btn scrollto">Registrarse</a>
         <a href="{% url 'login' %}" class="get-started-btn scrollto">Iniciar Sesión</a> 
@@ -74,10 +74,11 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
+      
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Detalles del producto</h2>
+          <h2>Detalles</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 
@@ -87,7 +88,7 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
               {% block image %}
@@ -98,7 +99,7 @@
             </div>
           </div>
 
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <div class="portfolio-info"> 
               {% block title %}  
               
@@ -115,12 +116,12 @@
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>Descripción</h2> 
-              {% block description %}
+
+              {% block comments %}
               <!-- <p>
                 Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
               </p> -->
-              {% endblock description %}
+              {% endblock comments %}
             </div>
           </div>
 
@@ -147,31 +148,29 @@
               </p>
               <div class="social-links mt-3">
                 <a href="https://twitter.com/agusssspereyraa" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
+                <a href="https://www.instagram.com/aguss_pereyraa/" class="instagram"><i class="bx bxl-instagram"></i></a>
             </div>
           </div>
+        </div>
+        
 
           <div class="col-lg-2 col-md-6 footer-links">
             <h4></h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Procesadores</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Gráficas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">MotherBoards</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">RAM</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'procesadores_lista' %}">Procesadores</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'placa_video_lista' %}">Gráficas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'motherboard_lista' %}">MotherBoards</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'ram_lista' %}">RAM</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4></h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Gabinetes</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Otros</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Clientes</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'gabinete_lista' %}">Gabinetes</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'otro_lista' %}">Otros</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}#sucursal">Sucursales</a></li>
             </ul>
           </div>
           
@@ -180,7 +179,7 @@
         &copy; Copyright <strong><span>PC Finder</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        Designed by <a href="#!">Agus</a>
+        Designed by <a href="{% url 'home' %}#about">Agus</a>
       </div>
     </div>
   </footer>
