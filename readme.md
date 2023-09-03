@@ -1,7 +1,7 @@
 # Proyecto Final Python - Agustín Pereyra
 ## Comisión 55630
 ## Nombre del proyecto:"PC-Finder"
-## Versión 2.0
+## Versión 3.0
 
 # Función:
 Página web para comprar componentes de PC varios. 
@@ -30,10 +30,10 @@ Funciones solo para superusuarios o usuarios staff:
 - Componente:
 Con atributos como: Tipo de componente, nombre, marca, precio, año de lanzamiento, imagen, descripción y fecha de la publicación.
 
--Cliente:
+- Cliente:
 Con atributos como: nombre, comentario, fecha del comentario y componente asociado al comentario.
 
--Sucursal:
+- Sucursal:
 Con atributos como: provincia, nombre, dirección y url del google maps asociado.
 
 # Usuarios:
@@ -42,10 +42,10 @@ user: agus
 contraseña: 12345
 
 # Tecnología usada:
--Python 3.11
--HTML5 
--CSS3 
--Bootstrap v5.3.1
+- Python 3.11
+- HTML5 
+- CSS3 
+- Bootstrap v5.3.1
 
 # Video demostración:
 https://youtu.be/T-0DoD8kgeQ
